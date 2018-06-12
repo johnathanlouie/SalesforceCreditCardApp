@@ -1,0 +1,5 @@
+<apex:page standardController="Order" extensions="PayFabric" title="Cal Poly Pomona Pay" action="{!init}">
+	<p>{!key}</p>
+	<p>{!status} {!message}</p>
+	<p>{!errors}</p>
+</apex:page>

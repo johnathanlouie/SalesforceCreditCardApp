@@ -1,0 +1,94 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" standardController="Order">
+<html>
+<head>
+	<title>Cal Poly Pomona Pay</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+	<style>
+	.form-container{width:600px;}
+	</style>
+</head>
+<body>
+<div class="form-container">
+<form action="{!$Page.cppp_results}?id={!Order}" method="POST">
+	<fieldset>
+		<legend>Order Information</legend>
+		<div class="row">
+			<div class="small-12 columns"><label for="oi_invoice">Invoice Number</label><input type="number" id="oi_invoice" name="oi_invoice" value="{!Order.OrderNumber}" readonly="readonly" /></div>
+			<div class="small-12 columns"><label for="oi_total">Grand Total</label><input type="number" id="oi_total" name="oi_total" required="required" value="{!Order.TotalAmount}" readonly="readonly" /></div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Shipping Address</legend>
+		<div class="row">
+			<div class="small-6 columns"><label for="sa_firstname">First Name</label><input type="text" id="sa_firstname" name="sa_firstname" value="{!Order.ShippingFirstName__c}" /></div>
+			<div class="small-6 columns"><label for="sa_lastname">Last Name</label><input type="text" id="sa_lastname" name="sa_lastname" value="{!Order.ShippingLastName__c}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns"><label for="sa_address">Address</label><input type="text" id="sa_address" name="sa_address" value="{!Order.ShippingStreet}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns"><label for="sa_address2">Address 2 (OPTIONAL) Apartment, suite, floor, etc.</label><input type="text" id="sa_address2" name="sa_address2" /></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"><label for="sa_city">City</label><input type="text" id="sa_city" name="sa_city" value="{!Order.ShippingCity}" /></div>
+			<div class="small-4 columns"><label for="sa_state">State/Province/Region</label><input type="text" id="sa_state" name="sa_state" value="{!Order.ShippingState}" /></div>
+			<div class="small-4 columns"><label for="sa_zipcode">Zip/Postal Code</label><input type="number" id="sa_zipcode" name="sa_zipcode" value="{!Order.ShippingPostalCode}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"><label for="sa_phone">Phone</label><input type="tel" id="sa_phone" name="sa_phone" /></div>
+			<div class="small-8 columns"><label for="sa_email">Email</label><input type="email" id="sa_email" name="sa_email" /></div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Credit Card</legend>
+		<div class="row">
+			<div class="small-6 columns"><label for="cc_firstname">First Name</label><input type="text" id="cc_firstname" name="cc_firstname" required="required" value="{!Order.BillingFirstName__c}" /></div>
+			<div class="small-6 columns"><label for="cc_lastname">Last Name</label><input type="text" id="cc_lastname" name="cc_lastname" required="required" value="{!Order.BillingLastName__c}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns"><label for="cc_number">Card Number</label><input type="number" id="cc_number" name="cc_number" required="required" /></div>
+		</div>
+		<div class="row">
+			<div class="small-6 columns">
+				<fieldset>
+					<legend>Expiration Date</legend>
+					<div class="row">
+						<div class="small-6 columns"><label for="cc_month">Month</label><input type="number" id="cc_month" name="cc_month" required="required" /></div>
+						<div class="small-6 columns"><label for="cc_year">Year</label><input type="number" id="cc_year" name="cc_year" required="required" /></div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="small-6 columns"><label for="cc_cvv2">Security Code (CVV2)</label><input type="number" id="cc_cvv2" name="cc_cvv2" required="required" /></div>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Billing Address</legend>
+		<div class="row">
+			<div class="small-12 columns"><input type="checkbox" id="ba_same" /><label for="ba_same">Same as the shipping address</label></div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns"><label for="ba_address">Address</label><input type="text" id="ba_address" name="ba_address" value="{!Order.BillingStreet}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns"><label for="ba_address2">Address 2 (OPTIONAL) Apartment, suite, floor, etc.</label><input type="text" id="ba_address2" name="ba_address2" /></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"><label for="ba_city">City</label><input type="text" id="ba_city" name="ba_city" value="{!Order.BillingCity}" /></div>
+			<div class="small-4 columns"><label for="ba_state">State/Province/Region</label><input type="text" id="ba_state" name="ba_state" value="{!Order.BillingState}" /></div>
+			<div class="small-4 columns"><label for="ba_zipcode">Zip/Postal Code</label><input type="number" id="ba_zipcode" name="ba_zipcode" value="{!Order.BillingPostalCode}" /></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"><label for="ba_phone">Phone</label><input type="tel" id="ba_phone" name="ba_phone" /></div>
+		</div>
+	</fieldset>
+	<input type="submit" class="button info" />
+</form>
+</div>
+</body>
+</html>
+</apex:page>
